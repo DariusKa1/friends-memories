@@ -1,5 +1,5 @@
 import express from "express"
-import { createPost, deleteByID, doesPostExist, getPostByID, getPosts } from "../actions/posts.action.js";
+import { createPost, deleteByID, doesPostExist, getPostByID, getPosts } from "../actions/posts.actions.js";
 
 const postsRouter = express.Router();
 
