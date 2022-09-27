@@ -48,13 +48,16 @@ export const loginUser = async (req, res) => {
     try {
         const user = await userModel.findOne({email})
 
-        if(user && await bcrypt.compare(password, user.password)) return res.status(201).json({success: true, user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id)
-
-        }})
+        if(user && await bcrypt.compare(password, user.password)) {
+            
+            console.log("Loged in");
+            return res.status(201).json({success: true, user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
+            }})
+        }
 
         return res.status(400).json({success: false, message: "Invaldi credentials"})
 

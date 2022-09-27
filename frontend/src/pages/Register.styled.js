@@ -9,25 +9,25 @@ export const RegisterStyled = styled.section`
     height: 100%;
 `
 
-export const Register__heading = styled.div`
+export const RegisterHeading = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
 `
 
-export const Heading__h1 = styled.h1`
+export const HeadingH1 = styled.h1`
     display: flex;
     justify-content: center;
     color: black;
 `
 
-export const Heading__p = styled.p`
+export const HeadingP = styled.p`
     display: flex;
     justify-content: center;
     color: gray;
 `
 
-export const Register__form = styled.form`
+export const RegisterForm = styled.form`
     width: 500px;
     height: max-content;
     display: flex;
@@ -36,7 +36,7 @@ export const Register__form = styled.form`
     justify-content: space-around;
 `
 
-export const Form__input = styled.input`
+export const FormInput = styled.input`
     width: 80%;
     margin: 10px 0;
     padding: 0 5%;
@@ -45,7 +45,7 @@ export const Form__input = styled.input`
     border-radius: 25px;
 `
 
-export const Form__button = styled.button`
+export const FormButton = styled.button`
     background-color: black;
     margin: 10px 0;
     color: white;

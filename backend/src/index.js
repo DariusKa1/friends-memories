@@ -17,6 +17,7 @@ app.use(cors());
 //routes
 app.use('/api/v1/user', userRoute);
 
+
 mongoose.connect(URI)
     .then(() => app.listen(PORT, () => console.log(`Server started on: ${PORT} \nServer connected to mongoDB`)))
     .catch((error) => console.log(error.message));

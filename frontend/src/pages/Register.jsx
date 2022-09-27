@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react"
 import { FaUser } from "react-icons/fa"
-import { RegisterStyled, Register__heading, Heading__h1, Heading__p, Register__form, Form__input, Form__button} from "./Register.styled"
+import { useSelector, useDispatch } from "react-redux"
+import { register, reset } from "../features/auth/authSlice"
+import { useNavigate } from "react-router-dom"
+import Spinner from "../components/Spinner/Spinner"
+import { 
+  FormButton, 
+  FormInput, 
+  HeadingH1, 
+  HeadingP, 
+  RegisterForm, 
+  RegisterHeading, 
+  RegisterStyled 
+} from "./Register.styled"
+
 
 
 const Register = () => {
@@ -13,6 +26,11 @@ const Register = () => {
 
   const { name, email, password, password2 } = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+
   const onChange = (e) => {
     setFormData(prevState => ({
       ...prevState,
@@ -20,21 +38,46 @@ const Register = () => {
     }))
   }
 
+  useEffect(() => {
+    if(isError){
+      alert(message)
+    }
+
+    if(isSuccess || user){
+      navigate("/")
+      dispatch(reset())
+    }
+  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch])
+
   const onSubmit = (e) => {
     e.preventDefault()
+
+    if(password !== password2) {
+      alert("Password do not match")
+    }else{
+      const userData = {
+        name, 
+        email,
+        password,
+      }
+
+      dispatch(register(userData))
+    }
   }
 
+  if(isLoading) return <Spinner />
+  
   return (
     <RegisterStyled>
-      <Register__heading>
-        <Heading__h1>
+      <RegisterHeading>
+        <HeadingH1>
           <FaUser /> Register
-        </Heading__h1>
-        <Heading__p>Please create an account.</Heading__p>
-      </Register__heading>
+        </HeadingH1>
+        <HeadingP>Please create an account.</HeadingP>
+      </RegisterHeading>
 
-      <Register__form onSubmit={onSubmit}>
-        <Form__input 
+      <RegisterForm onSubmit={onSubmit}>
+        <FormInput 
           type="text" 
           id="name" 
           name="name" 
@@ -42,7 +85,7 @@ const Register = () => {
           placeholder="Enter your name" 
           onChange={onChange}
         />
-        <Form__input 
+        <FormInput 
           type="text" 
           id="email" 
           name="email" 
@@ -50,7 +93,7 @@ const Register = () => {
           placeholder="Enter your email" 
           onChange={onChange}
         />
-        <Form__input 
+        <FormInput 
           type="password" 
           id="password" 
           name="password" 
@@ -58,7 +101,7 @@ const Register = () => {
           placeholder="Create your password" 
           onChange={onChange}
         />
-        <Form__input 
+        <FormInput 
           type="password" 
           id="password2" 
           name="password2" 
@@ -66,8 +109,8 @@ const Register = () => {
           placeholder="Confirm your password" 
           onChange={onChange}
         />
-        <Form__button type="submit">Create account</Form__button>
-      </Register__form>
+        <FormButton type="submit">Create account</FormButton>
+      </RegisterForm>
     </RegisterStyled>
   )
 }

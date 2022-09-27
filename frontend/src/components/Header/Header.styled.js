@@ -10,7 +10,7 @@ export const HeaderStyled = styled.header`
     height: 80px;
     width: inherit;
     background-color: darkgrey;
-    color: lightyellow;
+    color: white;
 `
 
 export const HeaderLogo = styled.div`
@@ -47,4 +47,12 @@ export const HeaderLi = styled.li`
         text-decoration: none;
         color: white;
     }
+`
+export const HeaderButton = styled.button`
+    cursor: pointer;
+    font-family: inherit;
+    background-color: darkgray;
+    border: none;
+    text-decoration: none;
+    color: white;
 `
