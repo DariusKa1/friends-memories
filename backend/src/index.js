@@ -2,8 +2,7 @@ import express from "express"
 import env from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
-import  postsRouter  from "./routers/posts.router.js"
-import userRouter from "./routers/user.router.js"
+import userRoute from "./routes/user.route.js"
 
 
 env.config();
@@ -16,8 +15,7 @@ app.use(express.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
 //routes
-app.use('/api/v1/posts', postsRouter);
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/user', userRoute);
 
 mongoose.connect(URI)
     .then(() => app.listen(PORT, () => console.log(`Server started on: ${PORT} \nServer connected to mongoDB`)))
